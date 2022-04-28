@@ -57,16 +57,16 @@
     <!-- $ QUERY CON GROUPBY  -->
     <section>
         <!--? 1. Contare quanti iscritti ci sono stati ogni anno -->
-
+        <!-- SELECT COUNT(*) AS numero_appelli, YEAR(enrolment_date) AS anni FROM `students` GROUP BY anni; -->
 
         <!--? 2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio  -->
-
+        <!-- SELECT COUNT(*) AS numero_professori, office_address AS office FROM `teachers` GROUP BY office; -->
 
         <!--? 3. Calcolare la media dei voti di ogni appello d'esame -->
-
+        <!-- SELECT AVG(vote) AS media_voti, exam_id AS appello_esame FROM `exam_student` GROUP BY appello_esame; -->
 
         <!--? 4. Contare quanti corsi di laurea ci sono per ogni dipartimento -->
-
+        <!-- SELECT count(name) AS corsi_in_un_dipartimento, department_id as corsi FROM `degrees` GROUP by corsi; -->
     </section>
 </body>
 
