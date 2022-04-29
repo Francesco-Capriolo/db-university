@@ -30,43 +30,49 @@
     <!-- $ QUERY CON SELECT -->
     <section>
         <!-- ? 1. Selezionare tutti gli studenti nati nel 1990 (160)-->
-        <!--  SELECT * FROM students WHERE YEAR(date_of_birth) = 1990;  -->
+        <!--  SELECT * FROM `students` WHERE YEAR(`date_of_birth`) = 1990;  -->
 
         <!-- ? 2. Selezionare tutti i corsi che valgono più di 10 crediti (479) -->
-        <!-- SELECT * FROM `courses` WHERE cfu > 10;  -->
+        <!-- SELECT * FROM `courses` WHERE `cfu` > 10;  -->
 
         <!-- ? 3. Selezionare tutti gli studenti che hanno più di 30 anni -->
-        <!-- SELECT * FROM students WHERE YEAR(date_of_birth) <= 1992;  -->
+        <!-- SELECT * FROM `students` WHERE YEAR(`date_of_birth`) <= 1992;  -->
+        <!-- SELECT * FROM `students` WHERE TIMESTAMPDIFF(YEAR,`date_of_birth`,CURDATE()) > 30 -->
+        <!-- SELECT * FROM `students` WHERE YEAR(NOW()) - YEAR(`date_of_birth`) > 30-->
 
         <!-- ? 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286) -->
-        <!-- SELECT (id) , period , year FROM courses WHERE period = 'I semestre' AND year = '1';  -->
+        <!-- SELECT * FROM `courses` WHERE `period` = 'I semestre' AND `year` = 1;  -->
+
 
         <!-- ? 5. Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio (dopo le 14) del 20/06/2020 (21) -->
-        <!-- SELECT (id) , hour , date FROM exams WHERE hour > '14:00:00' AND date = '2020/06/20'; -->
+        <!-- SELECT * FROM `exams` WHERE `hour` >= '14:00:00' AND `date` = '2020/06/20'; -->
+        <!-- SELECT * FROM `exams` WHERE HOUR(`hour`) >= 14 `date` = '2020/06/20'; -->
 
         <!--? 6. Selezionare tutti i corsi di laurea magistrale (38) -->
-        <!-- SELECT * FROM degrees WHERE LEVEL = 'magistrale'; -->
+        <!-- SELECT * FROM `degrees` WHERE `level` = 'magistrale'; -->
+
 
         <!--? 7. Da quanti dipartimenti è composta l'università? (12) -->
-        <!-- SELECT * FROM departments; -->
+        <!-- SELECT COUNT(*) AS 'numero_di_dipartimenti' FROM `departments`; -->
 
         <!--? 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50) -->
-        <!-- SELECT * FROM `teachers` WHERE phone IS NULL; -->
+        <!-- SELECT COUNT(*) AS 'insegnanti_senza_cell' FROM `teachers` WHERE `phone` IS NULL; -->
+        <!-- SELECT COUNT(*) AS 'insegnanti_senza_cell' FROM `teachers` WHERE ISNULL(`phone`); -->
     </section>
 
-    <!-- $ QUERY CON GROUPBY  -->
+    <!-- $ QUERY CON GROUP BY  -->
     <section>
         <!--? 1. Contare quanti iscritti ci sono stati ogni anno -->
-        <!-- SELECT COUNT(*) AS numero_appelli, YEAR(enrolment_date) AS anni FROM `students` GROUP BY anni; -->
+        <!-- SELECT COUNT(`id`) AS `numero_appelli`, YEAR(`enrolment_date`) AS `anno_iscrizione` FROM `students` GROUP BY `anno_iscrizione`; -->
 
         <!--? 2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio  -->
-        <!-- SELECT COUNT(*) AS numero_professori, office_address AS office FROM `teachers` GROUP BY office; -->
+        <!-- SELECT COUNT(`id`) AS `numero_professori`, `office_address` AS `office` FROM `teachers` GROUP BY `office`; -->
 
         <!--? 3. Calcolare la media dei voti di ogni appello d'esame -->
-        <!-- SELECT AVG(vote) AS media_voti, exam_id AS appello_esame FROM `exam_student` GROUP BY appello_esame; -->
+        <!-- SELECT AVG(`vote`) AS `media_voti`, `exam_id` AS `appello_esame` FROM `exam_student` GROUP BY `appello_esame`; -->
 
         <!--? 4. Contare quanti corsi di laurea ci sono per ogni dipartimento -->
-        <!-- SELECT count(name) AS corsi_in_un_dipartimento, department_id as corsi FROM `degrees` GROUP by corsi; -->
+        <!-- SELECT count(`name`) AS `corsi_in_un_dipartimento`, `department_id` as `corsi` FROM `degrees` GROUP by `corsi`; -->
     </section>
 </body>
 
